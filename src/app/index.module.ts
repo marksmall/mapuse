@@ -8,6 +8,8 @@ import { GithubContributor } from '../app/components/githubContributor/githubCon
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 import { acmeNavbar } from '../app/components/navbar/navbar.directive';
 import { acmeMalarkey } from '../app/components/malarkey/malarkey.directive';
+import { MapService } from '../app/components/map/map.service';
+import { MapController } from '../app/components/map/map.controller';
 
 declare var malarkey: any;
 declare var moment: moment.MomentStatic;
@@ -23,6 +25,8 @@ module roam {
     .run(runBlock)
     .service('githubContributor', GithubContributor)
     .service('webDevTec', WebDevTecService)
+    .service('mapService', MapService)
+    .controller('MapController', MapController)
     .controller('MainController', MainController)
     .directive('acmeNavbar', acmeNavbar)
     .directive('acmeMalarkey', acmeMalarkey);

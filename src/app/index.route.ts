@@ -6,6 +6,12 @@ export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterPro
       templateUrl: 'app/main/main.html',
       controller: 'MainController',
       controllerAs: 'main'
+    })
+    .state('map', {
+      url: '/map',
+      templateUrl: 'app/components/map/map.html',
+      controller: 'MapController',
+      controllerAs: 'map'
     });
 
   $urlRouterProvider.otherwise('/');
