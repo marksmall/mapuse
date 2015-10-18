@@ -18,6 +18,8 @@ export class SearchController {
   }
 
   public search(): void {
-    this.$log.debug('Searching for: ', this.searchTerm);
+    if (this.searchTerm.length > 2) {
+      this.$log.debug('Searching for: ', this.searchTerm);
+    }
   }
 }

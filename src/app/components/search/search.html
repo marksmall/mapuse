@@ -1,5 +1,5 @@
 <div id="search" class="input-group" data-ng-model="vm">
-  <input id="searchTerm" type="search" class="form-control" data-ng-model="vm.searchTerm" placeholder="Enter Search Text" aria-describedby="basic-addon2">
+  <input id="searchTerm" type="search" class="form-control" data-ng-model="vm.searchTerm" ng-keypress="vm.search()" placeholder="Enter Search Text" aria-describedby="basic-addon2">
   <span class="input-group-addon" id="basic-addon2">
     <button type="button" class="btn btn-primary" data-ng-click="vm.search()"><i class="glyphicon glyphicon-search"></i></button>
   </span>
