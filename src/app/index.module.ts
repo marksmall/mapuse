@@ -10,6 +10,8 @@ import { acmeNavbar } from '../app/components/navbar/navbar.directive';
 import { acmeMalarkey } from '../app/components/malarkey/malarkey.directive';
 import { MapService } from '../app/components/map/map.service';
 import { MapController } from '../app/components/map/map.controller';
+import { SearchService } from '../app/components/search/search.service';
+import { SearchController } from '../app/components/search/search.controller';
 
 declare var malarkey: any;
 declare var moment: moment.MomentStatic;
@@ -26,6 +28,8 @@ module roam {
     .service('githubContributor', GithubContributor)
     .service('webDevTec', WebDevTecService)
     .service('mapService', MapService)
+    .service('searchService', SearchService)
+    .controller('SearchController', SearchController)
     .controller('MapController', MapController)
     .controller('MainController', MainController)
     .directive('acmeNavbar', acmeNavbar)

@@ -7,10 +7,11 @@ export class MapService {
   /** @ngInject */
   constructor($log: ng.ILogService) {
     this.$log = $log;
+    this.$log.debug('Creating MapService');
 	  this.map = {};
 
     this.defaults = {
-      zoom: 15,
+      zoom: 2,
       startLocation: [ 0, 40 ],
       extractStylesKml: false,
       popupOffset: [ 0, 0 ],
@@ -24,16 +25,13 @@ export class MapService {
   init(data: any): void {
     // check openlayers is available on service instantiation
     // this can be handled with Require later on
- /*   if (!ol) return {};
- */
+    if (!ol) { return; }
+
     this.$log.debug('Initializing map with config: ', data);
 
     var config = angular.extend(this.defaults, data);
 
-    /*createMyZoomToExtentControl();*/
-
     // map initialisation
-    this.$log.debug('OL: ', ol);
     this.map = new ol.Map({
       target: 'map',
       layers: [
@@ -46,35 +44,10 @@ export class MapService {
         zoom: config.zoom
       }),
 		  controls: ol.control.defaults().extend([
-		    /*new myZoomToExtentControl({tipLabel: 'Fit to extent'}),*/
+				new ol.control.ZoomSlider(),
 				new ol.control.ScaleLine()
 			])
     });
-
-    /*popupSetup();
-    loadKML();
-    zoomToExtent();*/
- /*   defaults = {
-      zoom: 15,
-      startLocation: [0,40],
-      extractStylesKml: false,
-      popupOffset: [0,0],
-      featurePropertiesMap: ['name', 'description', 'address', 'phoneNumber', 'styleUrl'],
-      onFeatureSelected: function(feature) { console.log("feature selected", feature);}
-    },
-    zIndex = 9999,
-    popup,
-    selectedFeature,
-    myZoomToExtentControl;
-*/  }
-
-/*  getContribinitutors(limit: number = 30): ng.IPromise<any[]> {
-    return this.$http.get(this.apiHost + '/contributors?per_page=' + limit)
-      .then((response: any): any => {
-        return response.data;
-      })
-      .catch((error: any): any => {
-        this.$log.error('XHR Failed for getContributors.\n', error.data);
-      });
+    this.$log.debug('Map: ', this.map);
   }
-*/}
+}

@@ -8,6 +8,7 @@ export class MapController {
   /* @ngInject */
   constructor($log: ng.ILogService, mapService: MapService) {
     this.$log = $log;
+    this.$log.debug('Creating MapController');
     this.mapService = mapService;
 
     // map initialisation
