@@ -1,0 +1,20 @@
+#search {
+  position: absolute;
+  left: 10em;
+  top: 0.5em;
+  z-index: 100;
+  width: 15em;
+}
+
+#search input {
+  background-color: transparent;
+}
+
+#search .input-group-addon {
+  padding: 0;
+}
+
+#search .input-group-addon {
+  background-color: transparent;
+  border: none;
+}
