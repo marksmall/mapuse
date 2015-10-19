@@ -1,9 +1,9 @@
 'use strict';
 
-import { Point } from './point';
+import { Point } from '../map/point';
 
 export interface ISearch extends ng.resource.IResource<ISearch> {
-  searchTerm: string;
+  name: string;
   zoomLevel: number;
   point: Point;
 }

@@ -2,17 +2,17 @@
 
 var searchResults = [{
   name: 'Edinburgh',
-  zoomLevel: 4,
+  zoomLevel: 16,
   point: {
-    x: 0,
-	y: 0
+    x: 55.953252,
+    y: -3.188267
   }
 }, {
   name: 'London',
-  zoomLevel: 4,
+  zoomLevel: 16,
   point: {
-    x: 0,
-	y: 0
+    x: 51.5073509,
+    y: -0.1277583
   }
 }];
 

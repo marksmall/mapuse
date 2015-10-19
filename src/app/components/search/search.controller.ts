@@ -1,24 +1,24 @@
 'use strict';
 
-import { Point } from './point';
 import { ISearch } from './search.resource';
-import { SearchResult } from './search';
 import { ISearchResource } from './search.resource';
+import { MapService } from '../map/map.service';
 
-interface ISearchScope extends ng.IScope {
+export interface ISearchScope extends ng.IScope {
   searchResults: ISearch[];
-//  searchResult: ISearch;
+  searchResult: ISearch;
   vm: SearchController;
 }
 
 export class SearchController {
 
+  public scope: ISearchScope;
   private log: ng.ILogService;
-  private scope: ISearchScope;
   private Search: ISearchResource;
+  private mapService: MapService;
 
   /* @ngInject */
-  constructor($scope: ISearchScope, $log: ng.ILogService, Search: ISearchResource) {
+  constructor($scope: ISearchScope, $log: ng.ILogService, Search: ISearchResource, mapService: MapService) {
     this.log = $log;
     this.log.debug('Creating SearchController');
 
@@ -27,6 +27,7 @@ export class SearchController {
     this.scope.searchResults = [];
  //   this.scope.searchResult = new SearchResult('', 0, new Point(0, 0));
     this.Search = Search;
+    this.mapService = mapService;
   }
 
   public search(): void {
@@ -34,9 +35,15 @@ export class SearchController {
     this.Search.query({}, (results: ISearch[]) => this.onLoad(results));
   }
 
+  public centerMap(result: ISearch): void {
+    this.log.debug('Centering for result: ', result);
+
+    this.mapService.setCenter(result.point, result.zoomLevel);
+  }
+
   private onLoad(searchResults: ISearch[]): void {
     this.log.debug('Search Results: ', searchResults);
-    searchResults.forEach(result => {
+    searchResults.forEach((result: ISearch) => {
       this.log.debug('Result: ', result);
     });
     this.scope.searchResults = searchResults;

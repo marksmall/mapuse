@@ -1,14 +1,14 @@
-import { Point } from './point';
+import { Point } from '../map/point';
 import { ISearch } from './search.resource';
 
 export class SearchResult { // } implements ISearch {
 
-  searchTerm: string;
+  name: string;
   zoomLevel: number;
   point: Point;
 
-  constructor(searchTerm: string, zoomLevel: number, point: Point) {
-      this.searchTerm = searchTerm;
+  constructor(name: string, zoomLevel: number, point: Point) {
+      this.name = name;
       this.zoomLevel = zoomLevel;
       this.point = point;
   }

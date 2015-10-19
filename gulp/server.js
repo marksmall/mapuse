@@ -13,18 +13,18 @@ var util = require('util');
 var proxyMiddleware = require('http-proxy-middleware');
 
 var searchResults = [{
-  searchTerm: 'Edinburgh',
-  zoomLevel: 4,
+  name: 'Edinburgh',
+  zoomLevel: 16,
   point: {
-    x: 0,
-	y: 0
+    x: 55.953252,
+    y: -3.188267
   }
 }, {
-  searchTerm: 'London',
-  zoomLevel: 4,
+  name: 'London',
+  zoomLevel: 16,
   point: {
-    x: 0,
-	y: 0
+    x: 51.5073509,
+    y: -0.1277583
   }
 }];
 

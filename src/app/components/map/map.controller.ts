@@ -23,4 +23,5 @@ export class MapController {
   public onFeatureSelected(feature: any) {
     this.$log.debug('feature selected: ', feature);
   }
+  
 }

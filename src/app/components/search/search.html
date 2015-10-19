@@ -1,15 +1,13 @@
-<div id="search" class="input-group" data-ng-model="vm">
-  <input id="searchTerm" type="search" class="form-control" data-ng-model="vm.search.searchTerm" placeholder="Enter Search Text" aria-describedby="basic-addon2" />
-<!--  <input id="searchTerm" type="search" class="form-control" data-ng-model="vm.search.searchTerm" ng-keypress="vm.search()" placeholder="Enter Search Text" aria-describedby="basic-addon2" />
+<div id="search" data-ng-model="vm">
+  <div class="input-group">
+    <input id="searchTerm" type="search" class="form-control" data-ng-model="vm.search.searchTerm" placeholder="Enter Search Text" aria-describedby="basic-addon2" />
 
--->
-<!--  <pre><code>{{vm.searchResults}}</code></pre>
--->  <ul>
-    <li ng-repeat="result in searchResults">{{result.searchTerm}}</li>
+    <span class="input-group-addon" id="basic-addon2">
+      <button type="button" class="btn btn-primary" data-ng-click="vm.search()"><i class="glyphicon glyphicon-search"></i></button>
+    </span>
+  </div>
 
-<!--    <li ng-repeat="result in searchResults | filter:search " ng-if="!search">{{x.name}}</li>
--->  </ul>
-  <span class="input-group-addon" id="basic-addon2">
-    <button type="button" class="btn btn-primary" data-ng-click="vm.search()"><i class="glyphicon glyphicon-search"></i></button>
-  </span>
+  <ul class="list-group">
+    <li class="list-group-item" data-ng-click="vm.centerMap(result)" data-ng-repeat="result in searchResults">{{result.name}}</li>
+  </ul>
 </div>
