@@ -1,9 +1,10 @@
 'use strict';
 
-var express = require('express');
-var path = require('path');
+/*var express = require('express');
+*/var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var routes = require('./api/routes');
 
 var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
@@ -11,32 +12,6 @@ var browserSyncSpa = require('browser-sync-spa');
 var util = require('util');
 
 var proxyMiddleware = require('http-proxy-middleware');
-
-var searchResults = [{
-  name: 'Edinburgh',
-  zoomLevel: 16,
-  point: {
-    x: 55.953252,
-    y: -3.188267
-  }
-}, {
-  name: 'London',
-  zoomLevel: 16,
-  point: {
-    x: 51.5073509,
-    y: -0.1277583
-  }
-}];
-
-function api() {
-  var app = express();
-
-  app.get('/api/search', function (req, res) {
-    res.json(searchResults);
-  })
-
-  app.listen(8000);
-}
 
 function browserSyncInit(baseDir, browser) {
   browser = browser === undefined ? 'default' : browser;
@@ -76,7 +51,7 @@ browserSync.use(browserSyncSpa({
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
-  api();
+  routes.api();
 });
 
 gulp.task('serve:dist', ['build'], function () {

@@ -1,12 +1,10 @@
 'use strict';
 
-var api = require('./api');
+var express = require('express');
+var data = require('./data');
 
-module.exports = function(app) {
-  app.get('/api/search', api.search);
-
-  // All undefined api routes should return a 404
-  app.get('/api/*', function(req, res) {
-    res.send(404);
-  });
+exports.api = function() {
+    var app = express();
+    app.get('/api/search', data.search);
+    app.listen(8000);
 };
