@@ -1,5 +1,6 @@
 'use strict';
 
+var express = require('express');
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
@@ -10,6 +11,32 @@ var browserSyncSpa = require('browser-sync-spa');
 var util = require('util');
 
 var proxyMiddleware = require('http-proxy-middleware');
+
+var searchResults = [{
+  searchTerm: 'Edinburgh',
+  zoomLevel: 4,
+  point: {
+    x: 0,
+	y: 0
+  }
+}, {
+  searchTerm: 'London',
+  zoomLevel: 4,
+  point: {
+    x: 0,
+	y: 0
+  }
+}];
+
+function api() {
+  var app = express();
+
+  app.get('/api/search', function (req, res) {
+    res.json(searchResults);
+  })
+
+  app.listen(8000);
+}
 
 function browserSyncInit(baseDir, browser) {
   browser = browser === undefined ? 'default' : browser;
@@ -33,7 +60,8 @@ function browserSyncInit(baseDir, browser) {
    *
    * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.0.5/README.md
    */
-  // server.middleware = proxyMiddleware('/users', {target: 'http://jsonplaceholder.typicode.com', proxyHost: 'jsonplaceholder.typicode.com'});
+//  server.middleware = proxyMiddleware('/api/search', {target: 'http://localhost:4000', proxyHost: 'localhost:4000'});
+  server.middleware = proxyMiddleware('/api/search', {target: 'http://localhost:8000'});
 
   browserSync.instance = browserSync.init({
     startPath: '/',
@@ -48,6 +76,7 @@ browserSync.use(browserSyncSpa({
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
+  api();
 });
 
 gulp.task('serve:dist', ['build'], function () {
