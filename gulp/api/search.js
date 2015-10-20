@@ -23,6 +23,6 @@ var searchResults = [{
   }
 }];
 
-exports.search = function(req, res) {
+exports.getResults = function(req, res) {
   res.json(searchResults);
 };

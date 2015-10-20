@@ -12,7 +12,8 @@ import { MapService } from '../app/components/map/map.service';
 import { MapController } from '../app/components/map/map.controller';
 import { SearchController } from '../app/components/search/search.controller';
 import { SearchResource } from '../app/components/search/search.resource';
-// import { SearchFactory } from '../app/components/search/search.factory';
+import { digimapTools } from '../app/components/tools/tools.directive';
+import { ToolsResource } from '../app/components/tools/tools.resource';
 
 declare var malarkey: any;
 declare var moment: moment.MomentStatic;
@@ -29,12 +30,12 @@ module roam {
     .service('githubContributor', GithubContributor)
     .service('webDevTec', WebDevTecService)
     .service('mapService', MapService)
-    // .factory('Search', SearchResource.Search)
     .factory('Search', ['$resource', SearchResource.Search])
     .controller('SearchController', SearchController)
-//    .factory('SearchFactory', SearchFactory)
     .controller('MapController', MapController)
     .controller('MainController', MainController)
+    .factory('toolsResource', ['$resource', ToolsResource.Tools])
+    .directive('digimapTools', digimapTools)
     .directive('acmeNavbar', acmeNavbar)
     .directive('acmeMalarkey', acmeMalarkey);
 }

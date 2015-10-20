@@ -1,6 +1,12 @@
-#tools {
+/*
+  Don't use #tools as the popover is wired to the original HTML element.
+  I had to set the width/height to properly place the popover.
+*/
+digimap-tools {
   position: absolute;
   right: 3em;
   top: 0.5em;
   z-index: 100;
+  width: 56px;
+  height: 42px;
 }

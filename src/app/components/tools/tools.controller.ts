@@ -1,18 +1,31 @@
-import { SearchService } from './search.service';
+import { ITools } from './tools.resource';
+import { IToolsResource } from './tools.resource';
 
 export class ToolsController {
 
   private $log: ng.ILogService;
-  private searchService: SearchService;
+  private toolsResource: IToolsResource;
 
   /* @ngInject */
-  constructor($log: ng.ILogService, searchService: SearchService) {
+  constructor($log: ng.ILogService, toolsResource: IToolsResource) {
     this.$log = $log;
-    this.$log.debug('Creating SearchController');
-    this.searchService = searchService;
+    this.$log.debug('Creating ToolsController');
+    this.toolsResource = toolsResource;
+  }
 
-    $(document).ready(function() {
-      $('[data-toggle="popover"]').popover();
+  public getTools(): void {
+    this.toolsResource.query({}, (results: ITools[]) => this.onLoad(results));
+  }
+
+  private onLoad(toolsResults: ITools[]): void {
+    this.$log.debug('Tools Results: ', toolsResults);
+    toolsResults.forEach((result: ITools) => {
+      this.$log.debug('Result: ', result);
     });
   }
+
+/*  private getTool(tool: Itools): string {
+
+  }
+*/
 }

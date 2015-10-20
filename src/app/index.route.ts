@@ -13,35 +13,9 @@ export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterPro
             templateUrl: '/app/components/map/map.html',
             controller: 'MapController',
             controllerAs: 'map'
-          },
-          'tools': {
-            templateUrl: '/app/components/tools/tools.html'/*,
-            controller: 'MapController',
-            controllerAs: 'map'*/
           }
         }
-      })
-      .state('app.os', {
-        url: '/os'
       });
-/*    .state('home', {
-      url: '/',
-      templateUrl: 'app/main/main.html',
-      controller: 'MainController',
-      controllerAs: 'main'
-    })
-    .state('os', {
-      url: '/os',
-      templateUrl: 'app/components/map/map.html',
-      controller: 'MapController',
-      controllerAs: 'map'
-    })
-    .state('geology', {
-      url: '/geology',
-      templateUrl: 'app/components/map/map.html',
-      controller: 'MapController',
-      controllerAs: 'map'
-    });
-*/
+
   $urlRouterProvider.otherwise('/');
 }

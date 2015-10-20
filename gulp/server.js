@@ -36,7 +36,7 @@ function browserSyncInit(baseDir, browser) {
    * For more details and option, https://github.com/chimurai/http-proxy-middleware/blob/v0.0.5/README.md
    */
 //  server.middleware = proxyMiddleware('/api/search', {target: 'http://localhost:4000', proxyHost: 'localhost:4000'});
-  server.middleware = proxyMiddleware('/api/search', {target: 'http://localhost:8000'});
+  server.middleware = proxyMiddleware('/api', {target: 'http://localhost:8000'});
 
   browserSync.instance = browserSync.init({
     startPath: '/',
