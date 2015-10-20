@@ -30,3 +30,10 @@
 #map .ol-zoom-out.ol-has-tooltip:focus [role=tooltip] {
   top: 232px;
 }
+
+#overlay {
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 5px 10px;
+}
