@@ -10,3 +10,23 @@ digimap-tools {
   width: 56px;
   height: 42px;
 }
+
+/*
+  Make app tools buttons same size.
+*/
+.popover {
+  max-width: 500px;
+  width: 400px;
+}
+.cell {
+  padding: 5px !important;
+}
+
+.tool .glyphicon.glyphicon-print,
+.tool .glyphicon.glyphicon-cloud-upload,
+.tool .glyphicon.glyphicon-cloud-download,
+.tool .glyphicon.glyphicon-floppy-disk,
+.tool .glyphicon.glyphicon-pencil,
+.tool .glyphicon.glyphicon-info-sign {
+  font-size: 30px;
+}

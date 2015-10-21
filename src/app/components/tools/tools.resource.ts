@@ -1,7 +1,9 @@
 'use strict';
 
 export interface ITools extends ng.resource.IResource<ITools> {
-  tools: any[];
+  name: string;
+  glyph: string;
+  tooltip: string;
 }
 
 export interface IToolsResource  extends ng.resource.IResourceClass<ITools> {}

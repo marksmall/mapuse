@@ -4,8 +4,6 @@ interface IToolsScope extends ng.IScope {
   name: string;
 }
 
-
-/* @ngInject */
 export function digimapTools(): ng.IDirective {
 
   return {
@@ -18,14 +16,5 @@ export function digimapTools(): ng.IDirective {
 }
 
 function linkFunc(scope: IToolsScope, el: any, attr: any, vm: ToolsController) {
-  var tools = vm.getTools();
-
-  var html = '<strong>Replace Me</strong>';
-  el.popover({
-    trigger: 'click',
-    html: true,
-    content: html,
-    placement: attr.popoverPlacement
-  });
-
+  vm.getTools(el, attr);
 };
