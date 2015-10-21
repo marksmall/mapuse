@@ -36,6 +36,13 @@
         "assets/fonts/bootstrap/glyphicons-halflings-regular.woff",
         "assets/fonts/bootstrap/glyphicons-halflings-regular.woff2"
       ]
+    },
+    "openlayers3": {
+      "main": [
+        "build/ol-debug.js",
+        "build/ol.js",
+        "build/ol.css"
+      ]
     }
   },
   "resolutions": {
