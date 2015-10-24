@@ -1,38 +1,36 @@
 'use strict';
 
 import { ISearch } from './search.resource';
+import { ISearchScope } from './search.directive';
 import { ISearchResource } from './search.resource';
 import { MapService } from '../map/map.service';
-
-export interface ISearchScope extends ng.IScope {
-  searchResults: ISearch[];
-  searchResult: ISearch;
-  vm: SearchController;
-}
 
 export class SearchController {
 
   public scope: ISearchScope;
   private log: ng.ILogService;
-  private Search: ISearchResource;
+  private attributes: any;
+  private element: any;
+  private searchResource: ISearchResource;
   private mapService: MapService;
 
   /* @ngInject */
-  constructor($scope: ISearchScope, $log: ng.ILogService, Search: ISearchResource, mapService: MapService) {
+  constructor($scope: ISearchScope, $log: ng.ILogService, $attrs: ng.IAttributes[], $element: JQuery, searchResource: ISearchResource, mapService: MapService) {
     this.log = $log;
     this.log.debug('Creating SearchController');
+    this.attributes = $attrs;
+    this.element = $element;
 
     this.scope = $scope;
     this.scope.vm = this;
     this.scope.searchResults = [];
- //   this.scope.searchResult = new SearchResult('', 0, new Point(0, 0));
-    this.Search = Search;
+    this.searchResource = searchResource;
     this.mapService = mapService;
   }
 
   public search(): void {
-//    this.log.debug('searching for: ', this.scope.searchResult);
-    this.Search.query({}, (results: ISearch[]) => this.onLoad(results));
+    this.log.debug('Search Term: ', this.scope.searchTerm);
+    this.searchResource.query({ search: this.scope.searchTerm }, (results: ISearch[]) => this.onLoad(results));
   }
 
   public centerMap(result: ISearch): void {
@@ -42,10 +40,28 @@ export class SearchController {
   }
 
   private onLoad(searchResults: ISearch[]): void {
+    var searchElement = this.element.find('#search #searchTerm');
     this.log.debug('Search Results: ', searchResults);
-    searchResults.forEach((result: ISearch) => {
-      this.log.debug('Result: ', result);
-    });
+
+    if (searchResults.length === 0) {
+      this.log.debug('No Search Results Found');
+      // add event to element to display there was no results.
+      searchElement.popover({
+        trigger: 'manual',
+        html: true,
+        content: 'No Search Results found.',
+        placement: 'bottom'
+      });
+      searchElement.popover('show');
+    } else if (searchResults.length === 1) {
+      searchElement.popover('hide');
+      this.centerMap(searchResults[0]);
+    } else {
+      searchElement.popover('hide');
+      searchResults.forEach((result: ISearch) => {
+        this.log.debug('Result: ', result);
+      });
+    }
     this.scope.searchResults = searchResults;
   }
 

@@ -4,11 +4,6 @@ export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterPro
       .state('app', {
         url: '/',
         views: {
-          'search': {
-            templateUrl: '/app/components/search/search.html',
-            controller: 'SearchController',
-            controllerAs: 'search'
-          },
           'map': {
             templateUrl: '/app/components/map/map.html',
             controller: 'MapController',
