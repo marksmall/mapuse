@@ -1,9 +1,14 @@
 'use strict';
 
 import { ISearch } from './search.resource';
-import { ISearchScope } from './search.directive';
 import { ISearchResource } from './search.resource';
 import { MapService } from '../map/map.service';
+
+export interface ISearchScope extends ng.IScope {
+  searchResults: ISearch[];
+  searchTerm: string;
+  vm: SearchController;
+}
 
 export class SearchController {
 
