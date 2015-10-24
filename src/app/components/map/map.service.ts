@@ -2,8 +2,8 @@ import { Point } from './point';
 
 export class MapService {
 
+  public map: any;
   private $log: ng.ILogService;
-  private map: any;
   private defaults: any;
 
   /** @ngInject */
