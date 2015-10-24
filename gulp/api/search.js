@@ -2,6 +2,8 @@
 
 var gutil = require('gulp-util');
 
+var noResults = [];
+
 var singleResult = [{
   name: 'EH9 1PR',
   zoomLevel: 16,
@@ -10,8 +12,6 @@ var singleResult = [{
     y: -3.188267
   }
 }];
-
-var noResults = [];
 
 var multipleResults = [{
   name: 'Edinburgh',

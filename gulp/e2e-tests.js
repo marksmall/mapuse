@@ -9,9 +9,9 @@ var browserSync = require('browser-sync');
 var $ = require('gulp-load-plugins')();
 
 // Downloads the selenium webdriver
-gulp.task('webdriver-update', $.protractor.webdriver_update);
+gulp.task('webdriver-update', 'Download the selenium Webdriver', $.protractor.webdriver_update);
 
-gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
+gulp.task('webdriver-standalone', 'Download the selenium Standalone Webdriver', $.protractor.webdriver_standalone);
 
 function runProtractor (done) {
   var params = process.argv;
@@ -33,6 +33,6 @@ function runProtractor (done) {
     });
 }
 
-gulp.task('protractor', ['protractor:src']);
-gulp.task('protractor:src', ['serve:e2e', 'webdriver-update'], runProtractor);
-gulp.task('protractor:dist', ['serve:e2e-dist', 'webdriver-update'], runProtractor);
+gulp.task('protractor', 'Run Protractor E2E tests', ['protractor:src']);
+gulp.task('protractor:src', 'Run Protractor E2E tests on source code', ['serve:e2e', 'webdriver-update'], runProtractor);
+gulp.task('protractor:dist', 'Run Protractor E2E tests on distributed code', ['serve:e2e-dist', 'webdriver-update'], runProtractor);

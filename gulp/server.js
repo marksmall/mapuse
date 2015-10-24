@@ -49,19 +49,19 @@ browserSync.use(browserSyncSpa({
   selector: '[ng-app]'// Only needed for angular apps
 }));
 
-gulp.task('serve', ['watch'], function () {
+gulp.task('serve', 'Run Dev server with source code', ['watch'], function () {
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
   routes.api();
 });
 
-gulp.task('serve:dist', ['build'], function () {
+gulp.task('serve:dist', 'Run Dev server with distributed code', ['build'], function () {
   browserSyncInit(conf.paths.dist);
 });
 
-gulp.task('serve:e2e', ['inject'], function () {
+gulp.task('serve:e2e', 'Run Dev server for End-to-End tests', ['inject'], function () {
   browserSyncInit([conf.paths.tmp + '/serve', conf.paths.src], []);
 });
 
-gulp.task('serve:e2e-dist', ['build'], function () {
+gulp.task('serve:e2e-dist', 'Run Dev server for End-to-End tests using distributed code ', ['build'], function () {
   browserSyncInit(conf.paths.dist, []);
 });

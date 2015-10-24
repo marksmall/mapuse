@@ -51,18 +51,18 @@ function webpackWrapper(watch, test, callback) {
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
-gulp.task('scripts', function () {
+gulp.task('scripts', 'Lint and pre-compile TypeScript to JavaScript', function () {
   return webpackWrapper(false, false);
 });
 
-gulp.task('scripts:watch', ['scripts'], function (callback) {
+gulp.task('scripts:watch', 'TODO', ['scripts'], function (callback) {
   return webpackWrapper(true, false, callback);
 });
 
-gulp.task('scripts:test', function () {
+gulp.task('scripts:test', 'TODO', function () {
   return webpackWrapper(false, true);
 });
 
-gulp.task('scripts:test-watch', ['scripts'], function (callback) {
+gulp.task('scripts:test-watch', 'TODO', ['scripts'], function (callback) {
   return webpackWrapper(true, true, callback);
 });

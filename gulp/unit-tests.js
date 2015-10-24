@@ -16,10 +16,10 @@ function runTests (singleRun, done) {
   });
 }
 
-gulp.task('test', ['scripts:test'], function(done) {
+gulp.task('test', 'Run Unit Tests', ['scripts:test'], function(done) {
   runTests(true, done);
 });
 
-gulp.task('test:auto', ['scripts:test-watch'], function(done) {
+gulp.task('test:auto', 'Start test runner, watch for changes to tests and re-run', ['scripts:test-watch'], function(done) {
   runTests(false, done);
 });
