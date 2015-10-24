@@ -22,11 +22,11 @@ export class ToolsController {
   private onLoad(toolsResults: ITools[], el: any, attr: any): void {
     var html = '';
 
-    // Convert results into a 3 column grid.
+    // convert results into a 3 column grid.
     var grid = this.arrayToGrid(toolsResults, 3);
     this.$log.debug('Grid: ', grid);
 
-    // Construct HTML grid layout with buttons for each tool.
+    // cstruct HTML grid layout with buttons for each tool.
     grid.forEach((row: any[]) => {
       html += '<div class="row">';
       row.forEach((tool: ITools) => {
@@ -39,7 +39,7 @@ export class ToolsController {
       html += '</div>';
     });
 
-    // Add event to element to display the tools.
+    // add event to element to display the tools.
     el.popover({
       trigger: 'click',
       html: true,
@@ -55,7 +55,7 @@ export class ToolsController {
    */
   private arrayToGrid(arr: ITools[], columns: number) {
     var newArr = [];
-    for (var i = 0; i < arr.length; i+=columns) {
+    for (var i = 0; i < arr.length; i += columns) {
       newArr.push(arr.slice(i, i + columns));
     }
     return newArr;
