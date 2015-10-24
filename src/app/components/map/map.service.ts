@@ -51,6 +51,21 @@ export class MapService {
 			])
     });
 
+    this.addFeatureInfoEvent();
+
+    this.$log.debug('Map: ', this.map);
+  }
+
+  public setCenter(point: Point, zoomLevel: number): void {
+    this.$log.debug('Centering on: ', point, zoomLevel);
+    var position = ol.proj.transform([point.y, point.x], 'EPSG:4326', 'EPSG:3857');
+    this.$log.debug('Position: ', position);
+
+    this.map.getView().setCenter(position);
+    this.map.getView().setZoom(zoomLevel);
+  }
+
+  private addFeatureInfoEvent(): void {
     var overlay = new ol.Overlay({
       element: document.getElementById('overlay'),
       positioning: 'bottom-center'
@@ -74,15 +89,5 @@ export class MapService {
       // and add it to the map
       this.map.addOverlay(overlay);
     }, this);
-    this.$log.debug('Map: ', this.map);
-  }
-
-  public setCenter(point: Point, zoomLevel: number): void {
-    this.$log.debug('Centering on: ', point, zoomLevel);
-    var position = ol.proj.transform([point.y, point.x], 'EPSG:4326', 'EPSG:3857');
-    this.$log.debug('Position: ', position);
-
-    this.map.getView().setCenter(position);
-    this.map.getView().setZoom(zoomLevel);
   }
 }
