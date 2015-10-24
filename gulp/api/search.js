@@ -1,6 +1,19 @@
 'use strict';
 
-var searchResults = [{
+var gutil = require('gulp-util');
+
+var singleResult = [{
+  name: 'EH9 1PR',
+  zoomLevel: 16,
+  point: {
+    x: 55.953252,
+    y: -3.188267
+  }
+}];
+
+var noResults = [];
+
+var multipleResults = [{
   name: 'Edinburgh',
   zoomLevel: 16,
   point: {
@@ -24,5 +37,12 @@ var searchResults = [{
 }];
 
 exports.getResults = function(req, res) {
-  res.json(searchResults);
+  gutil.log(gutil.colors.green('Search: ', req.query.search));
+  if (req.query.search === 'zero') {
+    res.json(noResults);
+  } else if (req.query.search === 'EH9 1PR') {
+    res.json(singleResult);
+  } else {
+    res.json(multipleResults);
+  }
 };
