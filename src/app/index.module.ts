@@ -14,6 +14,7 @@ import { SearchResource } from '../app/components/search/search.resource';
 import { digimapSearch } from '../app/components/search/search.directive';
 import { digimapTools } from '../app/components/tools/tools.directive';
 import { ToolsResource } from '../app/components/tools/tools.resource';
+import { mapusePrint } from '../app/components/print/print.directive';
 
 declare var malarkey: any;
 declare var moment: moment.MomentStatic;
@@ -36,6 +37,7 @@ module roam {
     .controller('MainController', MainController)
     .factory('toolsResource', ['$resource', ToolsResource.Tools])
     .directive('digimapTools', digimapTools)
+    .directive('mapusePrint', mapusePrint)
     .directive('acmeNavbar', acmeNavbar)
     .directive('acmeMalarkey', acmeMalarkey);
 }
