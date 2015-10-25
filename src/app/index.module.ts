@@ -15,6 +15,7 @@ import { digimapSearch } from '../app/components/search/search.directive';
 import { digimapTools } from '../app/components/tools/tools.directive';
 import { ToolsResource } from '../app/components/tools/tools.resource';
 import { mapusePrint } from '../app/components/print/print.directive';
+import { mapuseSaveMapAs } from '../app/components/save-map-as/save-map-as.directive';
 
 declare var malarkey: any;
 declare var moment: moment.MomentStatic;
@@ -38,6 +39,7 @@ module roam {
     .factory('toolsResource', ['$resource', ToolsResource.Tools])
     .directive('digimapTools', digimapTools)
     .directive('mapusePrint', mapusePrint)
+    .directive('mapuseSaveMapAs', mapuseSaveMapAs)
     .directive('acmeNavbar', acmeNavbar)
     .directive('acmeMalarkey', acmeMalarkey);
 }
