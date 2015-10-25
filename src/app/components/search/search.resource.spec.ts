@@ -1,6 +1,6 @@
 import { SearchResource } from './search.resource';
 
-describe('Resource Search', () => {
+describe('Search Resource', () => {
   beforeEach(angular.mock.module('roam'));
 
   it('should be registered', inject((searchResource: SearchResource) => {
