@@ -33,6 +33,15 @@ export class SearchController {
     this.mapService = mapService;
   }
 
+  /**
+   * Capture keypress events and call search when the 'Enter' button pressed.
+   */
+  public enter(event: any): void {
+    if (event.which === 13) {
+      this.search();
+    }
+  }
+
   public search(): void {
     this.log.debug('Search Term: ', this.scope.searchTerm);
     this.searchResource.query({ search: this.scope.searchTerm }, (results: ISearch[]) => this.onLoad(results));
