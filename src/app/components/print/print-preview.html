@@ -3,12 +3,11 @@
     <div class="panel-heading">
       <h3 class="panel-title">Print Preview:</h3>
     </div>
-    <div class="panel-body">
-        <pre>
-          Print Options: {{printOptions}}
-        </pre>
 
-        <div class="form-group">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
           <label for="mapTitle" class="control-label col-xs-2">Map Title:</label>
           <div class="col-xs-4">
             <input type="text" class="form-control" name="mapTitle" data-ng=model="printOptions.title" required="true">
@@ -64,7 +63,12 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-xs-6">
+        <div id="previewMap">Preview Map</div>
+      </div>
     </div>
+
     <div class="panel-footer">
       <div class="btn-group">
         <button type="button" class="btn btn-default" data-ng-click=vm.cancel()>Cancel</button>

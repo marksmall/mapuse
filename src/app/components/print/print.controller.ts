@@ -1,3 +1,5 @@
+import { MapService } from '../map/map.service';
+
 export interface IPrintScope extends ng.IScope {
   tooltip: string;
 }
@@ -57,13 +59,18 @@ export class PrintPreviewController {
   private log: ng.ILogService;
   private scope: IPrintPreviewScope;
   private dialog: ng.ui.bootstrap.IModalServiceInstance;
-
+  private mapService: MapService;
+  private previewMap: any;
 
   /* @ngInject */
-  constructor($log: ng.ILogService, $scope: IPrintPreviewScope, $modalInstance: ng.ui.bootstrap.IModalServiceInstance) {
+  constructor($log: ng.ILogService, $scope: IPrintPreviewScope, $modalInstance: ng.ui.bootstrap.IModalServiceInstance, mapService: MapService) {
     this.log = $log;
     this.scope = $scope;
     this.dialog = $modalInstance;
+    this.mapService = mapService;
+
+//    var previewMap = this.mapService.map.clone();
+//    this.log('Preview Map: ', previewMap);
 //    this.item = item;
   }
 
