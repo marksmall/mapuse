@@ -7,27 +7,26 @@ import { MapService } from '../map/map.service';
 export interface ISearchScope extends ng.IScope {
   searchResults: ISearch[];
   searchTerm: string;
-  vm: SearchController;
+  extraValues: any[];
 }
 
 export class SearchController {
 
   public scope: ISearchScope;
   private log: ng.ILogService;
-  private attributes: any;
+  private attributes: ng.IAttributes[];
   private element: any;
   private searchResource: ISearchResource;
   private mapService: MapService;
 
   /* @ngInject */
-  constructor($scope: ISearchScope, $log: ng.ILogService, $attrs: ng.IAttributes[], $element: JQuery, searchResource: ISearchResource, mapService: MapService) {
+  constructor($scope: ISearchScope, $log: ng.ILogService, $attrs: ng.IAttributes[], $element: ng.IAugmentedJQuery, searchResource: ISearchResource, mapService: MapService) {
     this.log = $log;
     this.log.debug('Creating SearchController');
     this.attributes = $attrs;
     this.element = $element;
 
     this.scope = $scope;
-    this.scope.vm = this;
     this.scope.searchResults = [];
     this.searchResource = searchResource;
     this.mapService = mapService;
