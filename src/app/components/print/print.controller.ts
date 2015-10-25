@@ -1,9 +1,11 @@
-import { IPrintScope } from './print.directive';
+export interface IPrintScope extends ng.IScope {
+  tooltip: string;
+}
 
 export class PrintController {
 
-  public scope: IPrintScope;
   private log: ng.ILogService;
+  private scope: IPrintScope;
   private attributes: ng.IAttributes[];
   private element: any;
   private modal: ng.ui.bootstrap.IModalService;
@@ -25,7 +27,8 @@ export class PrintController {
  //   var that = this;
     var options: ng.ui.bootstrap.IModalSettings = {
       templateUrl: 'app/components/print/print-preview.html',
-      controller: PrintPreviewController
+      controller: PrintPreviewController,
+      controllerAs: 'vm'
       // ,
 //      resolve: {
 //        items: function () {
@@ -43,19 +46,30 @@ export class PrintController {
   }
 }
 
+export interface IPrintPreviewScope extends ng.IScope {
+  printOptions: any;
+}
+
+
 export class PrintPreviewController {
 
 //  public item: any;
+  private log: ng.ILogService;
+  private scope: IPrintPreviewScope;
   private dialog: ng.ui.bootstrap.IModalServiceInstance;
 
 
   /* @ngInject */
-  constructor($modalInstance: ng.ui.bootstrap.IModalServiceInstance) {
+  constructor($log: ng.ILogService, $scope: IPrintPreviewScope, $modalInstance: ng.ui.bootstrap.IModalServiceInstance) {
+    this.log = $log;
+    this.scope = $scope;
     this.dialog = $modalInstance;
 //    this.item = item;
   }
 
-  save() {
+  public generate(): void {
+    this.log.debug('Generating Printable Map');
+    this.log.debug('Print Options: ', this.scope.printOptions);
     this.dialog.close(); // passing this item back
 //    this.dialog.close(this.item); // passing this item back
                                           // is not necessary since it
@@ -63,7 +77,8 @@ export class PrintPreviewController {
                                           // item sent to the modal
   }
 
-  cancel() {
+  public cancel(): void {
+    this.log.debug('Cancel Print');
     this.dialog.dismiss('cancel');
   }
 }

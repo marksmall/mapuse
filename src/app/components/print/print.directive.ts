@@ -1,11 +1,5 @@
 import { PrintController } from './print.controller';
 
-export interface IPrintScope extends ng.IScope {
-  name: string;
-  tooltip: string;
-  items: string[];
-}
-
 export function mapusePrint(): ng.IDirective {
 
   return {

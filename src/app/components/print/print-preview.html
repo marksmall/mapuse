@@ -1,75 +1,75 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Print Preview:</h3>
-  </div>
-  <div class="panel-body">
-    <form name="printForm" data-ng-model="printOptions" class="form-horizontal" novalidate>
-      <pre>
-        Print Options: {{printOptions}}
-      </pre>
+<form name="printForm" class="form-horizontal" novalidate>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Print Preview:</h3>
+    </div>
+    <div class="panel-body">
+        <pre>
+          Print Options: {{printOptions}}
+        </pre>
 
-      <div class="form-group">
-        <label for="mapTitle" class="control-label col-xs-2">Map Title:</label>
-        <div class="col-xs-4">
-          <input type="text" class="form-control" name="mapTitle" data-ng=model="printOptions.title" required="true">
-        </div>
-      </div>
-
-      <div class="form-group" show-errors>
-        <label for="pageSize" class="control-label col-xs-2">Page Size:</label>
-        <div class="col-xs-10 col-sm-4">
-          <select name="pageSize" data-ng-model="printOptions.pageSize" class="form-control">
-            <option selected>A4</option>
-            <option>A3</option>
-            <option>A2</option>
-            <option>A1</option>
-            <option>A0</option>
-          </select>
-        </div>
-        <p class="help-block" data-ng-if="printForm.pageSize.$error.required">Page Size is required</p>
-      </div>
-
-      <div class="form-group" show-errors>
-        <label for="scale" class="control-label col-xs-2">Scale:</label>
-        <div class="col-xs-10 col-sm-4">
-          <input type="text" class="form-control" name="scale" data-ng-model="printOptions.scale" required="true">
-        </div>
-        <p class="help-block" data-ng-if="printForm.scale.$error.required">Scale is required</p>
-        <p class="help-block" data-ng-if="printForm.scale.$error.scale">Scale is invalid</p>
-      </div>
-
-      <div class="form-group" show-errors>
-        <label for="format" class="control-label col-xs-2">Format:</label>
-        <div class="col-xs-10 col-sm-4">
-        <select name="format" data-ng-model="printOptions.format" class="form-control" required>
-          <option selected>PDF</option>
-          <option>PNG</option>
-          <option>JPG</option>
-        </select>
-        </div>
-        <p class="help-block" data-ng-if="printForm.format.$error.required">Format is required</p>
-      </div>
-
-      <div class="form-group">
-        <div class="col-xs-offset-2 col-xs-9">
-          <div class="radio">
-            <label>
-              <input type="radio" name="landscape" value="landscape" data-ng-model="printOptions.orientation">
-              Landscape
-            </label>
-            <label>
-              <input type="radio" name="portrait" value="portrait" data-ng-model="printOptions.orientation">
-              Portrait
-            </label>
+        <div class="form-group">
+          <label for="mapTitle" class="control-label col-xs-2">Map Title:</label>
+          <div class="col-xs-4">
+            <input type="text" class="form-control" name="mapTitle" data-ng=model="printOptions.title" required="true">
           </div>
         </div>
+
+        <div class="form-group" show-errors>
+          <label for="pageSize" class="control-label col-xs-2">Page Size:</label>
+          <div class="col-xs-10 col-sm-4">
+            <select name="pageSize" data-ng-model="printOptions.pageSize" class="form-control">
+              <option selected>A4</option>
+              <option>A3</option>
+              <option>A2</option>
+              <option>A1</option>
+              <option>A0</option>
+            </select>
+          </div>
+          <p class="help-block" data-ng-if="printForm.pageSize.$error.required">Page Size is required</p>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="scale" class="control-label col-xs-2">Scale:</label>
+          <div class="col-xs-10 col-sm-4">
+            <input type="text" class="form-control" name="scale" data-ng-model="printOptions.scale" required="true">
+          </div>
+          <p class="help-block" data-ng-if="printForm.scale.$error.required">Scale is required</p>
+          <p class="help-block" data-ng-if="printForm.scale.$error.scale">Scale is invalid</p>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label for="format" class="control-label col-xs-2">Format:</label>
+          <div class="col-xs-10 col-sm-4">
+          <select name="format" data-ng-model="printOptions.format" class="form-control" required>
+            <option selected>PDF</option>
+            <option>PNG</option>
+            <option>JPG</option>
+          </select>
+          </div>
+          <p class="help-block" data-ng-if="printForm.format.$error.required">Format is required</p>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-offset-2 col-xs-9">
+            <div class="radio">
+              <label>
+                <input type="radio" name="landscape" value="landscape" data-ng-model="printOptions.orientation">
+                Landscape
+              </label>
+              <label>
+                <input type="radio" name="portrait" value="portrait" data-ng-model="printOptions.orientation">
+                Portrait
+              </label>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default" data-ng-click=vm.cancel()>Cancel</button>
+        <button type="button" class="btn btn-default" data-ng-click=vm.generate()>Generate</button>
       </div>
-    </form>
-  </div>
-  <div class="panel-footer">
-    <div class="btn-group">
-      <button type="button" class="btn btn-default" data-ng-click=vm.cancel()>Cancel</button>
-      <button type="button" class="btn btn-default" data-ng-click=mv.generate()>Generate</button>
     </div>
   </div>
-</div>
+</form>
