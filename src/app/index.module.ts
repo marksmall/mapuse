@@ -14,6 +14,7 @@ import { SearchResource } from '../app/components/search/search.resource';
 import { digimapSearch } from '../app/components/search/search.directive';
 import { digimapTools } from '../app/components/tools/tools.directive';
 import { ToolsResource } from '../app/components/tools/tools.resource';
+import { PrintResource } from '../app/components/print/print.resource';
 import { mapusePrint } from '../app/components/print/print.directive';
 import { mapuseSaveMapAs } from '../app/components/save-map-as/save-map-as.directive';
 
@@ -38,6 +39,7 @@ module roam {
     .controller('MainController', MainController)
     .factory('toolsResource', ['$resource', ToolsResource.Tools])
     .directive('digimapTools', digimapTools)
+    .factory('printResource', ['$resource', PrintResource.Print])
     .directive('mapusePrint', mapusePrint)
     .directive('mapuseSaveMapAs', mapuseSaveMapAs)
     .directive('acmeNavbar', acmeNavbar)

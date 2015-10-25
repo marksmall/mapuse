@@ -1,4 +1,4 @@
-import { MapService } from '../map/map.service';
+import { PrintPreviewController } from './print-preview.controller';
 
 export interface IPrintScope extends ng.IScope {
   print: any;
@@ -46,47 +46,5 @@ export class PrintController {
 
     this.modal.open(options);
     this.log.debug('Print Preview Panel Open');
-  }
-}
-
-export interface IPrintPreviewScope extends ng.IScope {
-  printOptions: any;
-}
-
-
-export class PrintPreviewController {
-
-//  public item: any;
-  private log: ng.ILogService;
-  private scope: IPrintPreviewScope;
-  private dialog: ng.ui.bootstrap.IModalServiceInstance;
-  private mapService: MapService;
-  private previewMap: any;
-
-  /* @ngInject */
-  constructor($log: ng.ILogService, $scope: IPrintPreviewScope, $modalInstance: ng.ui.bootstrap.IModalServiceInstance, mapService: MapService) {
-    this.log = $log;
-    this.scope = $scope;
-    this.dialog = $modalInstance;
-    this.mapService = mapService;
-
-//    var previewMap = this.mapService.map.clone();
-//    this.log('Preview Map: ', previewMap);
-//    this.item = item;
-  }
-
-  public generate(): void {
-    this.log.debug('Generating Printable Map');
-    this.log.debug('Print Options: ', this.scope.printOptions);
-    this.dialog.close(); // passing this item back
-//    this.dialog.close(this.item); // passing this item back
-                                          // is not necessary since it
-                                          // is the same instance of the
-                                          // item sent to the modal
-  }
-
-  public cancel(): void {
-    this.log.debug('Cancel Print');
-    this.dialog.dismiss('cancel');
   }
 }
