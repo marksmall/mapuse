@@ -10,6 +10,6 @@ export function digimapSearch(): ng.IDirective {
     },
     templateUrl: 'app/components/search/search.html',
     controller: SearchController,
-    controllerAs: 'vm'
+    controllerAs: 'searchCtrl'
   };
 }

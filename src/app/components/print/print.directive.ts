@@ -4,8 +4,8 @@ export function mapusePrint(): ng.IDirective {
 
   return {
     restrict: 'E',
-    templateUrl: '/app/components/print/print.html',
+    templateUrl: 'app/components/print/print.html',
     controller: PrintController,
-    controllerAs: 'vm'
+    controllerAs: 'printCtrl'
   };
 }

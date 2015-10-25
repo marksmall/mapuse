@@ -1,7 +1,7 @@
 import { MapService } from '../map/map.service';
 
 export interface IPrintScope extends ng.IScope {
-  tooltip: string;
+  print: any;
 }
 
 export class PrintController {
@@ -21,7 +21,8 @@ export class PrintController {
     this.modal = $modal;
     this.scope = $scope;
 
-    this.scope.tooltip = 'Generate Printable Maps';
+    this.scope.print = {};
+    this.scope.print.tooltip = 'Generate Printable Maps';
   }
 
   public open(): void {
