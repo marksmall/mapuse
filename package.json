@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "~0.13.1",
+    "body-parser": "^1.14.1",
     "browser-sync": "~2.9.2",
     "browser-sync-spa": "~1.0.2",
     "chalk": "~1.1.1",
