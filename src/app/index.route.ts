@@ -2,7 +2,7 @@
 export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
   $stateProvider
       .state('app', {
-        url: '/',
+        abstract: true,
         views: {
           'map': {
             templateUrl: '/app/components/map/map.html',
@@ -10,6 +10,12 @@ export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterPro
             controllerAs: 'map'
           }
         }
+      })
+      .state('app.os', {
+        url: '/os'
+      })
+      .state('app.geology', {
+        url: '/geology'
       });
 
   $urlRouterProvider.otherwise('/');

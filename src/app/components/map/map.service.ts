@@ -5,6 +5,7 @@ export class MapService {
   public map: any;
   private $log: ng.ILogService;
   private defaults: any;
+  private mapConfig: any;
 
   /** @ngInject */
   constructor($log: ng.ILogService) {
@@ -24,35 +25,18 @@ export class MapService {
     };
   }
 
-  init(data: any): void {
+  public init(data: any): void {
     // check openlayers is available on service instantiation
-    // this can be handled with Require later on
     if (!ol) { return; }
 
     this.$log.debug('Initializing map with config: ', data);
 
     var config = angular.extend(this.defaults, data);
 
-    // map initialisation
-    this.map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.MapQuest({layer: 'osm'})
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.transform(config.startLocation, 'EPSG:4326', 'EPSG:3857'),
-        zoom: config.zoom
-      }),
-		  controls: ol.control.defaults().extend([
-				new ol.control.ZoomSlider(),
-				new ol.control.ScaleLine()
-			])
-    });
+    this.map = this.getMap();
 
+//    this.featureInfoService.addFeatureInfoEvent(this.map);
     this.addFeatureInfoEvent();
-
     this.$log.debug('Map: ', this.map);
   }
 
@@ -63,6 +47,10 @@ export class MapService {
 
     this.map.getView().setCenter(position);
     this.map.getView().setZoom(zoomLevel);
+  }
+
+  public setMapConfig(config: any): void {
+    this.mapConfig = config;
   }
 
   private addFeatureInfoEvent(): void {
@@ -90,4 +78,81 @@ export class MapService {
       this.map.addOverlay(overlay);
     }, this);
   }
+
+  private getMap(): any {
+    // extent of the map in units of the projection (these match our base map)
+    // var extent = [-3276800, -3276800, 3276800, 3276800];
+    // this.$log.debug('Extent: ', this.mapConfig.extent);
+
+    // fixed resolutions to display the map at (pixels per ground unit (meters when
+    // the projection is British National Grid))
+    // var resolutions = [1600, 800, 400, 200, 100, 50, 25, 10, 5, 2.5, 1, 0.5, 0.25, 0.125, 0.0625];
+
+    // define British National Grid Proj4js projection (copied from http://epsg.io/27700.js)
+    proj4.defs('EPSG:27700','+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs');
+    // proj4.defs(this.mapConfig.crs.code, this.mapConfig.crs.proj4);
+    this.$log.debug('Code: ', this.mapConfig.crs.code);
+    this.$log.debug('proj4: ', this.mapConfig.crs.proj4);
+
+    // define an OL3 projection based on the included Proj4js projection
+    // definition and set it's extent.
+    var bng = ol.proj.get('EPSG:27700');
+    // var bng = ol.proj.get(this.mapConfig.crs.code);
+
+    // define a TileGrid to ensure that WMS requests are made for
+    // tiles at the correct resolutions and tile boundaries
+    var tileGrid = new ol.tilegrid.TileGrid({
+      origin: this.mapConfig.extent.slice(0, 2),
+      resolutions: this.mapConfig.resolutions
+    });
+
+    var map = new ol.Map({
+       target: 'map',
+       layers: [
+        new ol.layer.Tile({ // order matters, so layer at index zero is the base layer.
+          source: new ol.source.TileWMS({
+            url: 'http://t0.ads.astuntechnology.com/open/osopen/service?',
+            attributions: [
+              new ol.Attribution({html: 'Astun Data Service &copy; Ordnance Survey.'})
+            ],
+            params: {
+              'LAYERS': 'osopen',
+              'FORMAT': 'image/png',
+              'TILED': true
+            },
+            tileGrid: tileGrid
+          })
+        }),
+         new ol.layer.Tile({
+          source: new ol.source.TileWMS({
+            url: 'http://ogc.bgs.ac.uk/cgi-bin/BGS_Bedrock_and_Superficial_Geology/wms?',
+            attributions: [
+              new ol.Attribution({html: 'Write some text.'})
+            ],
+            params: {
+              'LAYERS': ['GBR_BGS_625k_BA'],
+              'FORMAT': 'image/png',
+              'TILED': true
+            },
+            tileGrid: tileGrid,
+            opacity: 0.5
+          })
+         })
+       ],
+       view: new ol.View({
+        projection: bng,
+        resolutions: this.mapConfig.resolutions,
+        center: [413674, 289141],
+        zoom: 0
+       }),
+      controls: ol.control.defaults().extend([
+        new ol.control.ZoomSlider(),
+        new ol.control.ScaleLine()
+      ])
+     });
+
+    return map;
+  }
+
+
 }

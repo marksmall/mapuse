@@ -8,6 +8,8 @@ import { GithubContributor } from '../app/components/githubContributor/githubCon
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 import { acmeNavbar } from '../app/components/navbar/navbar.directive';
 import { acmeMalarkey } from '../app/components/malarkey/malarkey.directive';
+import { MapConfig } from '../app/components/map/map.provider';
+import { mapConfig } from '../app/components/map/map.config';
 import { MapService } from '../app/components/map/map.service';
 import { MapController } from '../app/components/map/map.controller';
 import { SearchResource } from '../app/components/search/search.resource';
@@ -27,6 +29,8 @@ module roam {
   angular.module('roam', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'ngResource', 'ui.router', 'ui.bootstrap', 'toastr'])
     .constant('malarkey', malarkey)
     .constant('moment', moment)
+    .provider('mapConfig', MapConfig)
+    .config(mapConfig)
     .config(config)
     .config(routerConfig)
     .run(runBlock)
