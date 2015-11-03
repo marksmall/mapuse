@@ -108,37 +108,7 @@ export class MapService {
 
     var map = new ol.Map({
        target: 'map',
-       layers: [
-        new ol.layer.Tile({ // order matters, so layer at index zero is the base layer.
-          source: new ol.source.TileWMS({
-            url: 'http://t0.ads.astuntechnology.com/open/osopen/service?',
-            attributions: [
-              new ol.Attribution({html: 'Astun Data Service &copy; Ordnance Survey.'})
-            ],
-            params: {
-              'LAYERS': 'osopen',
-              'FORMAT': 'image/png',
-              'TILED': true
-            },
-            tileGrid: tileGrid
-          })
-        }),
-         new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: 'http://ogc.bgs.ac.uk/cgi-bin/BGS_Bedrock_and_Superficial_Geology/wms?',
-            attributions: [
-              new ol.Attribution({html: 'Write some text.'})
-            ],
-            params: {
-              'LAYERS': ['GBR_BGS_625k_BA'],
-              'FORMAT': 'image/png',
-              'TILED': true
-            },
-            tileGrid: tileGrid,
-            opacity: 0.5
-          })
-         })
-       ],
+       layers: this.getLayers(tileGrid),
        view: new ol.View({
         projection: bng,
         resolutions: this.mapConfig.resolutions,
@@ -154,5 +124,40 @@ export class MapService {
     return map;
   }
 
+  private getLayers(tileGrid: ol.tilegrid.TileGrid): any[] {
+    var layers = [
+      new ol.layer.Tile({ // order matters, so layer at index zero is the base layer.
+        source: new ol.source.TileWMS({
+          url: 'http://t0.ads.astuntechnology.com/open/osopen/service?',
+          attributions: [
+            new ol.Attribution({html: 'Astun Data Service &copy; Ordnance Survey.'})
+          ],
+          params: {
+            'LAYERS': 'osopen',
+            'FORMAT': 'image/png',
+            'TILED': true
+          },
+          tileGrid: tileGrid
+        })
+      }),
+      new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+          url: 'http://ogc.bgs.ac.uk/cgi-bin/BGS_Bedrock_and_Superficial_Geology/wms?',
+          attributions: [
+            new ol.Attribution({html: 'Write some text.'})
+          ],
+          params: {
+            'LAYERS': ['GBR_BGS_625k_BA'],
+            'FORMAT': 'image/png',
+            'TILED': true
+          },
+          tileGrid: tileGrid,
+          opacity: 0.5
+        })
+      })
+    ];
+
+    return layers;
+  }
 
 }
