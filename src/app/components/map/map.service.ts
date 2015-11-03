@@ -112,7 +112,7 @@ export class MapService {
        view: new ol.View({
         projection: bng,
         resolutions: this.mapConfig.resolutions,
-        center: [413674, 289141],
+        center: this.mapConfig.center,
         zoom: 0
        }),
       controls: ol.control.defaults().extend([
