@@ -16,6 +16,9 @@ export function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterPro
       })
       .state('app.geology', {
         url: '/geology'
+      })
+      .state('app.historic', {
+        url: '/historic'
       });
 
   $urlRouterProvider.otherwise('/');

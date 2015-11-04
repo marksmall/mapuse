@@ -79,6 +79,9 @@ export class MapService {
     }, this);
   }
 
+  /**
+   * Construct a map.
+   */
   private getMap(): any {
     // extent of the map in units of the projection (these match our base map)
     // var extent = [-3276800, -3276800, 3276800, 3276800];
@@ -120,38 +123,35 @@ export class MapService {
     return map;
   }
 
+  /**
+   * Construct a list of layers from the map config.
+   */
   private getLayers(tileGrid: ol.tilegrid.TileGrid): any[] {
-    var layers = [
-      new ol.layer.Tile({ // order matters, so layer at index zero is the base layer.
+    var layers = [];
+
+    this.mapConfig.layers.forEach((element: any) => {
+      var attributions = '<p>';
+      element.attributions.forEach(attribution => {
+        attributions += attribution + '<br/>';
+      });
+      attributions += '</p>';
+
+      layers.push(new ol.layer.Tile({
         source: new ol.source.TileWMS({
-          url: 'http://t0.ads.astuntechnology.com/open/osopen/service?',
+          url: element.url,
           attributions: [
-            new ol.Attribution({html: 'Astun Data Service &copy; Ordnance Survey.'})
+            new ol.Attribution({html: attributions})
           ],
           params: {
-            'LAYERS': 'osopen',
-            'FORMAT': 'image/png',
-            'TILED': true
-          },
-          tileGrid: tileGrid
-        })
-      }),
-      new ol.layer.Tile({
-        source: new ol.source.TileWMS({
-          url: 'http://ogc.bgs.ac.uk/cgi-bin/BGS_Bedrock_and_Superficial_Geology/wms?',
-          attributions: [
-            new ol.Attribution({html: 'Write some text.'})
-          ],
-          params: {
-            'LAYERS': ['GBR_BGS_625k_BA'],
-            'FORMAT': 'image/png',
+            'LAYERS': element.sublayers,
+            'FORMAT': element.format,
             'TILED': true
           },
           tileGrid: tileGrid,
           opacity: 0.5
         })
-      })
-    ];
+      }));
+    });
 
     return layers;
   }
