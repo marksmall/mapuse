@@ -137,23 +137,85 @@ export class MapService {
       attributions += '</p>';
 
       layers.push(new ol.layer.Tile({
-        source: new ol.source.TileWMS({
-          url: element.url,
-          attributions: [
-            new ol.Attribution({html: attributions})
-          ],
-          params: {
-            'LAYERS': element.sublayers,
-            'FORMAT': element.format,
-            'TILED': true
-          },
-          tileGrid: tileGrid,
-          opacity: 0.5
-        })
+        source: this.getSource(element, attributions, tileGrid),
+        opacity: element.opacity
       }));
     });
 
     return layers;
   }
+
+  private getSource(element: any, attributions: string, tileGrid: ol.tilegrid.TileGrid): any {
+    this.$log.debug('Element: ', element);
+    if (element.type.toUpperCase() === 'WMS') {
+      return this.getWmsSource(element, attributions, tileGrid);
+    // } else if (element.type.toUpperCase() === 'WMTS') {
+    //   return this.getWmtsSource(element, attributions, tileGrid);
+    }
+  }
+
+  private getWmsSource(element: any, attributions: string, tileGrid: ol.tilegrid.TileGrid): any {
+    var source = new ol.source.TileWMS({
+      url: element.url,
+      attributions: [
+        new ol.Attribution({html: attributions})
+      ],
+      params: {
+        'LAYERS': element.sublayers,
+        'FORMAT': element.format,
+        'TILED': true
+      },
+      tileGrid: tileGrid
+    });
+
+    return source;
+  }
+
+  // private getWmtsSource(element: any, attributions: string, tileGrid: ol.tilegrid.TileGrid): any {
+  //   var extent = ol.proj.transformExtent([-9.257287, 49.849456, 2.127704, 60.89107], 'EPSG:4326', 'EPSG:3857');
+  //   var center = ol.proj.transformExtent([-3.564791, 55.370263], 'EPSG:4326', 'EPSG:3857');
+  //   var source = new ol.source.XYZ({
+  //     attributions: attributions,
+  //     tileUrlFunction: function(src) {
+  //       return NLSTileUrlOS(src[1], src[2], src[0]);
+  //     },
+  //     extent: extent,
+  //     minZoom: 1,
+  //     maxZoom: 14,
+  //     tilePixelRatio: 1
+  //   });
+
+  //   return source;
+
+  // // var extent = ol.proj.transformExtent([-9.257287, 49.849456, 2.127704, 60.89107],
+  // //               'EPSG:4326', 'EPSG:3857');
+  // //       var center = ol.proj.transformExtent([-3.564791, 55.370263],
+  // //               'EPSG:4326', 'EPSG:3857');
+
+  // //       var map = new ol.Map({
+  // //         layers: [
+  // //           new ol.layer.Tile({
+  // //             source: new ol.source.XYZ({
+  // //               attributions: [NLS_API_ATTRIBUTION],
+  // //               tileUrlFunction: function(src) {
+  // //                 return NLSTileUrlOS(src[1], src[2], src[0]);
+  // //               },
+  // //               extent: extent,
+  // //               minZoom: 1,
+  // //               maxZoom: 14,
+  // //               tilePixelRatio: 1
+  // //             })
+  // //           })
+  // //         ],
+  // //         renderer: 'canvas',
+  // //         target: 'map',
+  // //         view: new ol.View({
+  // //           projection: 'EPSG:3857',
+  // //           center: center,
+  // //           zoom: 1
+  // //         })
+  // //       });
+  // //       map.getView().fitExtent(extent, map.getSize());
+  // }
 
 }
