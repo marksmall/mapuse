@@ -82,22 +82,18 @@ export class MapService {
   private getMap(): any {
     // extent of the map in units of the projection (these match our base map)
     // var extent = [-3276800, -3276800, 3276800, 3276800];
-    // this.$log.debug('Extent: ', this.mapConfig.extent);
 
     // fixed resolutions to display the map at (pixels per ground unit (meters when
     // the projection is British National Grid))
     // var resolutions = [1600, 800, 400, 200, 100, 50, 25, 10, 5, 2.5, 1, 0.5, 0.25, 0.125, 0.0625];
 
     // define British National Grid Proj4js projection (copied from http://epsg.io/27700.js)
-    proj4.defs('EPSG:27700','+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs');
-    // proj4.defs(this.mapConfig.crs.code, this.mapConfig.crs.proj4);
-    this.$log.debug('Code: ', this.mapConfig.crs.code);
-    this.$log.debug('proj4: ', this.mapConfig.crs.proj4);
+    // proj4.defs('EPSG:27700','+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +towgs84=446.448,-125.157,542.06,0.15,0.247,0.842,-20.489 +units=m +no_defs');
+    // proj4.defs('EPSG:3857','+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs');
+    proj4.defs(this.mapConfig.crs.code, this.mapConfig.crs.proj4);
 
     // define an OL3 projection based on the included Proj4js projection
-    // definition and set it's extent.
-    var bng = ol.proj.get('EPSG:27700');
-    // var bng = ol.proj.get(this.mapConfig.crs.code);
+    var bng = ol.proj.get(this.mapConfig.crs.code);
 
     // define a TileGrid to ensure that WMS requests are made for
     // tiles at the correct resolutions and tile boundaries
