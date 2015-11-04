@@ -60,7 +60,7 @@ export class MapService {
     });
 
     // register an event handler for the click event
-    this.map.on('click', function(event: any) {
+    this.map.on('singleclick', function(event: any) {
       this.$log.debug('Map Click Event: ', event);
       // extract the spatial coordinate of the click event in map projection units
       var coord = event.coordinate;
@@ -122,6 +122,10 @@ export class MapService {
 
     return map;
   }
+
+
+
+
 
   /**
    * Construct a list of layers from the map config.
