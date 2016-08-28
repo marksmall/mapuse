@@ -1,82 +1,121 @@
-'use strict';
+// Karma configuration
+// reference: http://karma-runner.github.io/0.13/config/configuration-file.html
 
-var path = require('path');
-var conf = require('./gulp/conf');
+module.exports = function (config) {
+  config.set({
 
-var _ = require('lodash');
-var wiredep = require('wiredep');
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    // basePath: '.tmp/',
 
-function listFiles() {
-  var wiredepOptions = _.extend({}, conf.wiredep, {
-    dependencies: true,
-    devDependencies: true
-  });
-
-  return wiredep(wiredepOptions).js
-    .concat([
-      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-      path.join(conf.paths.src, '/**/*.html')
-    ]);
-}
-
-module.exports = function(config) {
-
-  var configuration = {
-    files: listFiles(),
-
-    singleRun: true,
-
-    autoWatch: false,
-
-    ngHtml2JsPreprocessor: {
-      stripPrefix: conf.paths.src + '/',
-      moduleName: 'roam'
-    },
-
-    logLevel: 'WARN',
-
-    frameworks: ['jasmine'],
-
-    browsers : ['PhantomJS'],
-
-    plugins : [
-      'karma-phantomjs-launcher',
-      'karma-coverage',
+    plugins: [
+      'karma-jspm',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor'
+      'karma-phantomjs-launcher',
+      'karma-spec-reporter'
     ],
 
-    coverageReporter: {
-      type : 'html',
-      dir : 'coverage/'
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: [
+      'jspm',
+      'jasmine'
+    ],
+
+    // list of files / patterns to load in the browser (loaded before SystemJS)
+    // had 404 errors, got patterns which solved it from: http://stackoverflow.com/questions/37178267/angular2-rc1-karma-error-unable-to-find-angular-core-testing
+    files: [
+      {pattern: 'node_modules/es6-shim/es6-shim.min.js', included: true, watched: true},
+      {pattern: 'node_modules/reflect-metadata/Reflect.js', included: true, watched: true},
+      {pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: true},
+      {pattern: 'node_modules/zone.js/dist/fake-async-test.js', included: true, watched: true},
+      {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true},
+      {pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false},
+      {pattern: 'node_modules/@angular/**/*.js', included: false, watched: false},
+      // {pattern: 'karma-test-shim.js', included: true, watched: true},
+
+      {pattern: '.tmp/**/*.js', included: false, watched: true},
+
+      {pattern: '.tmp/**/*.ts', included: false, watched: false},
+      {pattern: '.tmp/**/*.js.map', included: false, watched: false}
+    ],
+
+    // list of files to exclude
+    exclude: [],
+
+    // list of paths mappings
+    // can be used to map paths served by the Karma web server to /base/ content
+    // knowing that /base corresponds to the project root folder (i.e., where this config file is located)
+    proxies: {
+      '/.tmp': '/base/.tmp' // without this, karma-jspm can't load the files
     },
 
-    reporters: ['progress', 'coverage']
-  };
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {},
 
-  var preprocessors = {};
-  var pathSrcHtml = path.join(conf.paths.src, '/**/*.html');
-  preprocessors[pathSrcHtml] = ['ng-html2js'];
+    // test results reporter to use
+    // possible values: 'dots', 'progress', 'spec', 'junit'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    // https://www.npmjs.com/package/karma-junit-reporter
+    // https://www.npmjs.com/package/karma-spec-reporter
+    reporters: ['spec'],
 
-  var pathTmpJs = path.join(conf.paths.tmp, '/serve/app/index.module.js');
+    // web server port
+    port: 9876,
 
-  preprocessors[pathTmpJs] = ['coverage'];
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
 
-  configuration.preprocessors = preprocessors;
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
 
-  // This block is needed to execute Chrome on Travis
-  // If you ever plan to use Chrome and Travis, you can keep it
-  // If not, you can safely remove it
-  // https://github.com/karma-runner/karma/issues/1144#issuecomment-53633076
-  if(configuration.browsers[0] === 'Chrome' && process.env.TRAVIS) {
-    configuration.customLaunchers = {
-      'chrome-travis-ci': {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    };
-    configuration.browsers = ['chrome-travis-ci'];
-  }
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
 
-  config.set(configuration);
-};
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: [
+      'PhantomJS'
+      // 'Chrome',
+      // 'Firefox',
+      // 'PhantomJS',
+      // 'IE'
+    ],
+
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: false,
+
+    junitReporter: {
+      outputFile: 'target/reports/tests-unit/unit.xml',
+      suite: 'unit'
+    },
+
+    // doc: https://www.npmjs.com/package/karma-jspm
+    // reference config: https://github.com/gunnarlium/babel-jspm-karma-jasmine-istanbul
+    jspm: {
+      // Path to your SystemJS/JSPM configuration file
+      config: 'jspm.conf.js',
+
+      // Where to find jspm packages
+      // packages: 'jspm_packages',
+
+      // One use case for this is to only put test specs in loadFiles, and jspm will only load the src files when and if the test files require them.
+      loadFiles: [
+        // load all tests
+        '.tmp/*.spec.js', // in case there are tests in the root folder
+        '.tmp/**/*.spec.js'
+      ],
+
+      // Make additional files/a file pattern available for jspm to load, but not load it right away.
+      serveFiles: [
+        '.tmp/**/!(*.spec).js' // make sure that all files are available
+      ],
+
+      // SystemJS configuration specifically for tests, added after your config file.
+      // Good for adding test libraries and mock modules
+      paths: {}
+    }
+  })
+}

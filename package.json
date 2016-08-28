@@ -1,61 +1,92 @@
 {
-  "name": "roam",
-  "version": "0.0.0",
-  "dependencies": {
-    "express": "^4.13.3"
+  "name": "angular2-jspm-seed",
+  "description": "Seed application with proxied API stubs",
+  "author": {
+    "name": "Mark Small",
+    "email": "marksmall@gmx.com"
   },
-  "scripts": {
-    "test": "gulp test"
+  "contributors": [],
+  "homepage": "https://github.com/marksmall/angular2-jspm-seed",
+  "bugs": "https://github.com/marksmall/angular2-jspm-seed/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marksmall/angular2-jspm-seed.git"
+  },
+  "keywords": [
+    "web",
+    "gulp",
+    "angular2",
+    "jspm",
+    "proxied api"
+  ],
+  "private": true,
+  "version": "0.0.2",
+  "jspm": {
+    "configFile": "jspm.conf.js",
+    "dependencies": {
+      "angular-common": "npm:@angular/common@^2.0.0-rc.5",
+      "angular-compiler": "npm:@angular/compiler@^2.0.0-rc.5",
+      "angular-core": "npm:@angular/core@^2.0.0-rc.5",
+      "angular-http": "npm:@angular/http@^2.0.0-rc.5",
+      "angular-platform-browser": "npm:@angular/platform-browser@^2.0.0-rc.5",
+      "angular-platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@^2.0.0-rc.5",
+      "angular-router": "npm:@angular/router@^3.0.0-rc.1",
+      "angular-upgrade": "npm:@angular/upgrade@^2.0.0-rc.5",
+      "babel-runtime": "npm:babel-runtime@^6.11.6",
+      "normalize.css": "github:necolas/normalize.css@^4.2.0",
+      "reflect-metadata": "npm:reflect-metadata@^0.1.8",
+      "rxjs": "npm:rxjs@^5.0.0-beta.11",
+      "zone.js": "npm:zone.js@^0.6.15"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^6.13.2"
+    }
+  },
+  "dependencies": {
+    "@angular/common": "^2.0.0-rc.5",
+    "@angular/compiler": "^2.0.0-rc.5",
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/http": "^2.0.0-rc.5",
+    "@angular/platform-browser": "^2.0.0-rc.5",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.5",
+    "@angular/router": "^3.0.0-rc.1",
+    "babel-runtime": "^6.11.6",
+    "es6-shim": "^0.35.0",
+    "normalize.css": "^4.2.0",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "^5.0.0-beta.11",
+    "zone.js": "^0.6.15"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "~0.13.1",
-    "body-parser": "^1.14.1",
-    "browser-sync": "~2.9.2",
-    "browser-sync-spa": "~1.0.2",
-    "chalk": "~1.1.1",
-    "del": "~2.0.1",
-    "eslint-plugin-angular": "~0.11.0",
-    "gulp": "~3.9.0",
-    "gulp-angular-templatecache": "~1.7.0",
-    "gulp-autoprefixer": "~3.0.1",
-    "gulp-eslint": "~1.0.0",
-    "gulp-filter": "~3.0.1",
-    "gulp-flatten": "~0.2.0",
-    "gulp-help": "^1.6.1",
-    "gulp-inject": "~1.5.0",
-    "gulp-load-plugins": "~0.10.0",
-    "gulp-minify-css": "~1.2.1",
-    "gulp-minify-html": "~1.0.4",
-    "gulp-protractor": "~1.0.0",
-    "gulp-rename": "~1.2.2",
-    "gulp-replace": "~0.5.4",
-    "gulp-rev": "~6.0.1",
-    "gulp-rev-replace": "~0.4.2",
-    "gulp-sass": "~2.0.4",
-    "gulp-size": "~2.0.0",
-    "gulp-sourcemaps": "~1.5.2",
-    "gulp-uglify": "~1.4.0",
-    "gulp-useref": "~1.3.0",
-    "gulp-util": "~3.0.6",
-    "http-proxy-middleware": "~0.8.0",
-    "karma": "~0.13.9",
-    "karma-coverage": "~0.5.2",
-    "karma-jasmine": "~0.3.6",
-    "karma-ng-html2js-preprocessor": "~0.1.2",
-    "karma-phantomjs-launcher": "~0.2.1",
-    "lodash": "~3.10.1",
-    "main-bower-files": "~2.9.0",
-    "ng-annotate-loader": "0.0.10",
-    "phantomjs": "^1.9.18",
-    "tsd": "~0.6.4",
-    "tslint-loader": "~1.0.1",
-    "typescript": "~1.5.3",
-    "uglify-save-license": "~0.4.1",
-    "webpack-stream": "~2.1.0",
-    "wiredep": "~2.2.2",
-    "wrench": "~1.5.8"
+    "babel-core": "^6.13.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
+    "babel-preset-es2015": "^6.13.2",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "banger": "0.0.15",
+    "jasmine-core": "^2.4.1",
+    "jspm": "^0.16.31",
+    "karma-jasmine": "^0.3.8",
+    "nodemon": "^1.9.1",
+    "require-dir": "^0.3.0",
+    "typescript": "^1.8.9",
+    "typings": "^0.7.9"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.5.0",
+    "npm": ">=3.10.6"
+  },
+  "scripts": {
+    "typings-install": "typings install",
+    "setup": "npm install --no-optional && jspm install && jspm dl-loader && npm run typings-install",
+    "help": "gulp help",
+    "test": "gulp test",
+    "serve": "nodemon --watch gulpfile.js --watch gulpfile.babel.js --watch package.json --watch .sass-lint.yml --watch .eslintrc.json --watch tsconfig.json --watch tslint.json --watch jspm.conf.js --exec gulp serve",
+    "start": "npm run serve",
+    "dist": "gulp dist",
+    "serve-dist": "nodemon --watch gulpfile.js --watch gulpfile.babel.js --watch package.json --watch .eslintrc.json --watch .sass-lint.yml --watch tsconfig.json --watch tslint.json --watch jspm.conf.js --exec gulp serve-dist",
+    "update": "npm install --no-optional && jspm update && jspm dl-loader && npm run typings-install",
+    "outdated": "npm outdated"
   }
 }
