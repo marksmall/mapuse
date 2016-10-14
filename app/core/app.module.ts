@@ -6,10 +6,13 @@ import {routing, appRoutingProviders} from './app.routing'
 import {App} from './app'
 import {Home} from '../pages/home/home'
 
+import { MapComponent } from '../modules/map/map.component'
+import { MapService } from '../modules/map/map.service'
+
 @NgModule({
-    declarations: [App, Home],
+    declarations: [App, Home, MapComponent],
     imports: [BrowserModule, routing],
-    providers: [appRoutingProviders],
+    providers: [appRoutingProviders, MapService],
     bootstrap:    [App]
 })
 export class AppModule {}

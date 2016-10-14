@@ -1,0 +1,27 @@
+.map {
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.ol-zoom {
+  .ol-zoom-out {
+    margin-top: 204px;
+  }
+}
+
+.ol-zoomslider {
+  background-color: transparent;
+  top: 2.3em;
+}
+
+.ol-touch {
+  .ol-zoom {
+    .ol-zoom-out {
+      margin-top: 212px;
+    }
+  }
+
+  .ol-zoomslider {
+    top: 2.75em;
+  }
+}

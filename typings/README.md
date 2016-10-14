@@ -7,3 +7,8 @@ Type definition files should be installed using `typings install ... --save`; on
 All type definition files in this folder will automatically be picked up by the TypeScript compiler.
 
 For more details about the typings CLI, check out the official docs: https://github.com/typings/typings
+
+
+## Usage
+
+`typings install --global --source dt openlayers --save`
